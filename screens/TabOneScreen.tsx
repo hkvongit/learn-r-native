@@ -1,5 +1,10 @@
 import * as React from "react";
-import { ScrollView, StyleSheet, FlatList } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
@@ -32,11 +37,19 @@ export default function TabOneScreen({
       <FlatList
         numColumns={2}
         data={myFriends}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => {
+          return item.id.toString();
+        }}
         renderItem={({ item }) => (
-          <Text style={{ ...styles.simpleText, backgroundColor: "blue" }}>
-            {item.name}
-          </Text>
+          <TouchableOpacity
+            onPress={(id) => {
+              console.log("touch element id = ", item.id);
+            }}
+          >
+            <Text style={{ ...styles.simpleText, backgroundColor: "blue" }}>
+              {item.name}
+            </Text>
+          </TouchableOpacity>
         )}
       />
       {/* Viewing a list using flat list */}
