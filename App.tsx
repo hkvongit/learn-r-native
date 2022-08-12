@@ -1,18 +1,17 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
-import Home from "./review-app-screens/Home";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
-import Navigation from "./navigation-some";
-import Todo from "./screens/Todo";
 import * as eva from "@eva-design/eva";
-import { ApplicationProvider, Layout, Text } from "@ui-kitten/components";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Item from "./review-app-screens/Item";
+import { ApplicationProvider } from "@ui-kitten/components";
+import { StyleSheet } from "react-native";
+import SeminarScreen from "./review-app-screens/Main-screens/Seminars/Seminars.d";
+import ProfileScreen from "./review-app-screens/Main-screens/Profile/Profile.d";
+import DashboardScreen from "./review-app-screens/Main-screens/Dashboard/DashboardScreen.d";
+import JobsScreenStack from "./review-app-screens/Main-screens/Jobs/JobsScreenStacks";
 
-const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -22,20 +21,41 @@ export default function App() {
     return null;
   } else {
     return (
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Home"
-            component={Home}
-            options={{ title: "Home" }}
-          />
-          <Stack.Screen
-            name="Profile"
-            component={Item}
-            options={{ title: "Individual Profile" }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <ApplicationProvider {...eva} theme={eva.light}>
+        <NavigationContainer>
+          <Tab.Navigator>
+            <Tab.Screen
+              name="Jobs"
+              options={{
+                headerShown: false,
+              }}
+              component={JobsScreenStack}
+            />
+            <Tab.Screen name="Seminar" component={SeminarScreen} />
+            <Tab.Screen name="Dashboard" component={DashboardScreen} />
+            <Tab.Screen name="Profile" component={ProfileScreen} />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </ApplicationProvider>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  view: {
+    marginLeft: 0,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "90%",
+  },
+  divider: {
+    width: 20,
+    backgroundColor: "white",
+    borderColor: "white",
+  },
+  topBarHeader: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+});
