@@ -1,6 +1,6 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
 import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
 import * as eva from "@eva-design/eva";
@@ -10,8 +10,7 @@ import SeminarScreen from "./review-app-screens/Main-screens/Seminars/Seminars.d
 import ProfileScreen from "./review-app-screens/Main-screens/Profile/Profile.d";
 import DashboardScreen from "./review-app-screens/Main-screens/Dashboard/DashboardScreen.d";
 import JobsScreenStack from "./review-app-screens/Main-screens/Jobs/JobsScreenStacks";
-
-const Tab = createBottomTabNavigator();
+import StackNavigation from "./navigation-some/StackNavigation";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -22,19 +21,14 @@ export default function App() {
   } else {
     return (
       <ApplicationProvider {...eva} theme={eva.light}>
+        {/* Navigation flow
+            App.tsx -> StackNavigation (All individual screens are here) -> if first page of stack then bottomBar present, else no
+            bottom bar
+        */}
         <NavigationContainer>
-          <Tab.Navigator>
-            <Tab.Screen
-              name="Jobs"
-              options={{
-                headerShown: false,
-              }}
-              component={JobsScreenStack}
-            />
-            <Tab.Screen name="Seminar" component={SeminarScreen} />
-            <Tab.Screen name="Dashboard" component={DashboardScreen} />
-            <Tab.Screen name="Profile" component={ProfileScreen} />
-          </Tab.Navigator>
+          {/* Best way to hide bottom navbar from some inner pages: 
+          https://reactnavigation.org/docs/hiding-tabbar-in-screens/ */}
+          <StackNavigation />
         </NavigationContainer>
       </ApplicationProvider>
     );
