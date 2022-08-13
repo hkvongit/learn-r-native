@@ -11,7 +11,7 @@ const JobsScreen = ({ navigation }) => {
   const moveToJobDetailsScreen = () => {
     console.log("Moving to moveToJobDetailsScreen")
     navigation.navigate("Details")
-    navigation.setOptions({ title: "Jobs Screen" })
+    navigation.setOptions({ title: "Jobs" })
   }
 
   return (

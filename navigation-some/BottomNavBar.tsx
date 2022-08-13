@@ -1,11 +1,10 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import JobsScreenStack from "../review-app-screens/Main-screens/Jobs/JobsScreenStacks";
-import SeminarScreen from "../review-app-screens/Main-screens/Seminars/Seminars.d";
 import DashboardScreen from "../review-app-screens/Main-screens/Dashboard/DashboardScreen.d";
 import ProfileScreen from "../review-app-screens/Main-screens/Profile/Profile.d";
 import JobsScreen from "../review-app-screens/Main-screens/Jobs/Jobs";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
+import SeminarScreen from "../review-app-screens/Main-screens/Seminars/Seminars.d";
 
 const Tab = createBottomTabNavigator();
 
